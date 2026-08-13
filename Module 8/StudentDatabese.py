@@ -7,20 +7,26 @@ class StudentDatabase:
 
 class Student:
     def __init__(self,id,name,department,is_enrolled):
-        self.id = id
-        self.name = name
-        self.dep = department
-        self.enrolled = is_enrolled
+        self.__id = id
+        self.__name = name
+        self.__dep = department
+        self.__enrolled = is_enrolled
+
+    def get_id(self):
+        return self.__id
+    def get_enroll(self):
+        return self.__enrolled
+
     def enroll_student(self,id):
-        if self.enrolled == False:
-            self.enrolled = True
+        if self.__enrolled == False:
+            self.__enrolled = True
 
     def drop_student(self,id):
-        self.enrolled = False
+        self.__enrolled = False
 
             
     def view_student_info(self):
-        print(f'ID: {self.id}, Name: {self.name}, Department: {self.dep}, Enrolled: {self.enrolled}')
+        print(f'ID: {self.__id}, Name: {self.__name}, Department: {self.__dep}, Enrolled: {self.__enrolled}')
         
       
 # stn = StudentDatabase()
@@ -56,14 +62,14 @@ def user():
             id = int(input('Enter student ID : '))
             flag = -1
             for student_id in StudentDatabase.student_list:
-                if student_id.id == id:
+                if student_id.get_id() == id:
                     flag = 1
-                    if student_id.enrolled == False:
+                    if student_id.get_enroll() == False:
                         student_id.enroll_student(id)
-                        print(f'{student_id.id} has enrolled')
+                        print(f'{student_id.get_id()} has enrolled')
                         break
-                    elif student_id.enrolled == True:
-                        print(f'{student_id.id} is already enrolled')
+                    elif student_id.get_enroll() == True:
+                        print(f'{student_id.get_id()} is already enrolled')
                         break
 
             if flag == -1:
@@ -73,14 +79,14 @@ def user():
             id = int(input('Enter student ID : '))
             flag = -1
             for student_id in StudentDatabase.student_list:
-                if student_id.id == id:
+                if student_id.get_id() == id:
                     flag = 1
-                    if student_id.enrolled == True:
+                    if student_id.get_enroll() == True:
                         student_id.drop_student(id)
-                        print(f'{student_id.id} has dropped')
+                        print(f'{student_id.get_id()} has dropped')
                         break
-                    elif student_id.enrolled == False:
-                        print(f'{student_id.id} is already dropped')
+                    elif student_id.get_enroll() == False:
+                        print(f'{student_id.get_id()} is already dropped')
                         break
 
             if flag == -1:
